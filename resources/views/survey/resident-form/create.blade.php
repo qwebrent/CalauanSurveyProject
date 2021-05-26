@@ -2,11 +2,11 @@
 
 @section('content')
 @include('users.partials.header', [
-    'title' => __(''),
+    'title' => __('Resident Information'),
     'class' => 'col-lg-7'
 ])
 
-<form method="post" action="#" autocomplete="off" enctype="multipart/form-data">
+<form method="post" action="{{ route('residence.store') }}" autocomplete="off" enctype="multipart/form-data">
     @csrf
 
 <div class="container-fluid mt--7">
@@ -164,14 +164,14 @@
                                         <select class="form-control form-control-alternative" name="blood_type" id="blood_type">
 
 
-                                            <option value="">A+</option>
-                                            <option value="">O+</option>
-                                            <option value="">B+</option>
-                                            <option value="">AB+</option>
-                                            <option value="">A-</option>
-                                            <option value="">O-</option>
-                                            <option value="">B-</option>
-                                            <option value="">AB-</option>
+                                            <option>A+</option>
+                                            <option>O+</option>
+                                            <option>B+</option>
+                                            <option>AB+</option>
+                                            <option>A-</option>
+                                            <option>O-</option>
+                                            <option>B-</option>
+                                            <option>AB-</option>
 
                                         </select>
                                     </div>
@@ -206,7 +206,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('religion') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Religion') }}</label>
                                         <input type="text" name="religion" id="input-name" class="form-control form-control-alternative{{ $errors->has('religion') ? ' is-invalid' : '' }}" placeholder="{{ __('Religion') }}" value="{{ old('religion') }}" required autofocus>
@@ -219,31 +219,38 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('gender') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Gender') }}</label>
                                         <select class="form-control form-control-alternative" name="gender" id="gender">
-
-                                            <option value="">Male</option>
-                                            <option value="">Female</option>
-
+                                            <option>Male</option>
+                                            <option>Female</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group{{ $errors->has('civstatus_id') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Civil Status') }}</label>
-                                        <select class="form-control form-control-alternative" name="civstatus_id" id="civstatus_id">
-
-                                            <option value="">Single</option>
-                                            <option value="">Married</option>
-                                            <option value="">Divorced</option>
-                                            <option value="">Widowed</option>
-                                            <option value="">Separated</option>
-
-
+                                        <select class="form-control form-control-alternative" name="civstatus" id="civstatus_id">
+                                            <option>Single</option>
+                                            <option>Married</option>
+                                            <option>Divorced</option>
+                                            <option>Widowed</option>
+                                            <option>Separated</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group{{ $errors->has('citizenship') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Citizenship') }}</label>
+                                        <input type="text" name="citizenship" id="input-name" class="form-control form-control-alternative{{ $errors->has('citizenship') ? ' is-invalid' : '' }}" placeholder="{{ __('Citizenship') }}" value="{{ old('citizenship') }}" required autofocus>
+                                        
+                                        @if ($errors->has('citizenship'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('citizenship') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +273,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('weight') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Weight') }}</label>
-                                        <input type="text" name="height" id="input-name" class="form-control form-control-alternative{{ $errors->has('weight') ? ' is-invalid' : '' }}" placeholder="{{ __('Weight') }}" value="{{ old('weight') }}" required autofocus>
+                                        <input type="text" name="weight" id="input-name" class="form-control form-control-alternative{{ $errors->has('weight') ? ' is-invalid' : '' }}" placeholder="{{ __('Weight') }}" value="{{ old('weight') }}" required autofocus>
 
                                         @if ($errors->has('weight'))
                                             <span class="invalid-feedback" role="alert">
@@ -357,7 +364,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('barangay_id') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Barangay') }}</label>
-                                            <select class="form-control form-control-alternative" name="barangay_id" id="barangay_id">
+                                            <select class="form-control form-control-alternative" name="barangay" id="barangay_id">
 
                                                 @foreach ($barangays as $barangay)
                                                     <option value="{{$barangay->id}}">{{ $barangay->barangay }}</option>
@@ -498,11 +505,9 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-primary mt-4"><i class="fas fa-angle-left mr-2"></i>{{ __('Previous') }}</a>
+                                <button type="submit" class="btn btn-success mt-4" value="Submit Form">{{ __('Next') }}<i class="fas fa-angle-right ml-2"></i></button>
                             </div>
                         </div>
                 </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarangaysTable extends Migration
+class CreateRelativesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateBarangaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('barangays', function (Blueprint $table) {
+        Schema::create('relatives', function (Blueprint $table) {
             $table->id();
-            $table->string('barangay');
-            $table->integer('surveyed')->default(0);
+            $table->string('full_name');
+            $table->date('birthday');
+            $table->string('relationship');
+            $table->unsignedBigInteger('res_id');
+            $table->foreign('res_id')->references('unique_id')->on('residents');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateBarangaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barangays');
+        Schema::dropIfExists('relatives');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTblEducationalAttainmentTable extends Migration
+class CreateEducationalAttainmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTblEducationalAttainmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_educational_attainment', function (Blueprint $table) {
+        Schema::create('educational_attainments', function (Blueprint $table) {
             $table->id();
             $table->string('school_name');
             $table->string('school_address');
             $table->string('course');
             $table->string('level');
-            $table->date('school_year');
-            $table->unsignedbigInteger('res_id');
-            $table->foreign('res_id')->references('unique_id')->on('tbl_residence');
+            $table->string('school_year');
+            $table->unsignedBigInteger('res_id');
+            $table->foreign('res_id')->references('unique_id')->on('residents');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateTblEducationalAttainmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_educational_attainment');
+        Schema::dropIfExists('educational_attainments');
     }
 }

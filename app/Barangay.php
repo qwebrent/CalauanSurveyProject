@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Barangay extends Model
 {
     protected $fillable = [
-        'barangay'
+        'barangay', 'surveyed'
     ];
 }

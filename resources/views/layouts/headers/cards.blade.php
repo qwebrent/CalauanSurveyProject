@@ -11,7 +11,7 @@
                                 <div class="col">
                                     @component('components.barangaynames', ['barangay' => $barangay->barangay])@endcomponent
                                     <h5 class="card-title text-uppercase text-muted mb-0">No. of Residents Surveyed</h5>
-                                    <span class="h2 font-weight-bold mb-0">10</span>
+                                    <span class="h2 font-weight-bold mb-0">{{ $barangay->surveyed }}</span>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-muted text-sm">

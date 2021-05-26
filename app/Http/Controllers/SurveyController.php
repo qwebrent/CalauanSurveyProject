@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Resident;
 use Illuminate\Http\Request;
-use App\Barangay;
+
 
 class SurveyController extends Controller
 {
     public function create(){
 
-        $barangays = Barangay::get();
-        return view('survey.resident', compact('barangays'));
+        return view('survey.resident-form.create');
+    }
+
+    public function residents(){
+
+        $resident = Resident::with('education', 'experiences', 'household', 'relatives')->get();
+        return view('residents.residents');
+
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTblHouseholdTable extends Migration
+class CreateHouseholdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTblHouseholdTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_household', function (Blueprint $table) {
+        Schema::create('households', function (Blueprint $table) {
             $table->id();
-            $table->date('yearnow');
+            $table->string('yearnow');
             $table->string('owner');
             $table->string('lot')->nullable();
             $table->string('street');
@@ -24,8 +24,8 @@ class CreateTblHouseholdTable extends Migration
             $table->string('municipality');
             $table->string('province');
             $table->string('date_reg');
-            $table->unsignedbigInteger('res_id');
-            $table->foreign('res_id')->references('unique_id')->on('tbl_residence');
+            $table->unsignedBigInteger('res_id');
+            $table->foreign('res_id')->references('unique_id')->on('residents');
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ class CreateTblHouseholdTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_household');
+        Schema::dropIfExists('households');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTblResidenceTable extends Migration
+class CreateResidentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTblResidenceTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_residence', function (Blueprint $table) {
+        Schema::create('residents', function (Blueprint $table) {
             $table->id();
             $table->unsignedbigInteger('unique_id')->unique();
-            $table->date('yearnow');
-            $table->mediumText('image');
+            $table->string('yearnow');
+            $table->mediumText('image')->nullable();
             $table->string('fname');
             $table->string('mname');
             $table->string('lname');
@@ -58,6 +58,6 @@ class CreateTblResidenceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_residence');
+        Schema::dropIfExists('residents');
     }
 }

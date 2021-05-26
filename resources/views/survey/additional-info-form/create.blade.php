@@ -2,11 +2,11 @@
 
 @section('content')
 @include('users.partials.header', [
-    'title' => __(''),
+    'title' => __('Additional Information'),
     'class' => 'col-lg-7'
 ])
 
-<form method="post" action="#" autocomplete="off" enctype="multipart/form-data">
+<form method="post" action="{{ route('addInfo.store', request()->route()->parameters) }}" autocomplete="off" enctype="multipart/form-data">
     @csrf
 
 <div class="container-fluid mt--7">
@@ -89,63 +89,41 @@
                                 </div>
                             </div>
                         </div>
-
+                        {{-- TODO:WorkExperience--}}
                         <hr class="my-4" />
                         <h6 class="heading-small text-muted mb-4">{{ __('Work Experience') }}</h6>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('job_type') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Job Type') }}</label>
-                                    <input type="text" name="job_type" id="input-name" class="form-control form-control-alternative{{ $errors->has('job_type') ? ' is-invalid' : '' }}" placeholder="{{ __('Job Type') }}" value="{{ old('job_type') }}" required autofocus>
-
-                                    @if ($errors->has('job_type'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('job_type') }}</strong>
-                                        </span>
-                                    @endif
+                        <div class="row work">
+                            <div class="form-group w-100 d-flex align-items-center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-name">Job Type</label>
+                                        <input type="text" name="job_type[]" id="input-name" class="form-control form-control-alternative" placeholder="Job Type"  required autofocus>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('position') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Position') }}</label>
-                                    <input type="text" name="position" id="input-name" class="form-control form-control-alternative{{ $errors->has('position') ? ' is-invalid' : '' }}" placeholder="{{ __('Position') }}" value="{{ old('position') }}" required autofocus>
-
-                                    @if ($errors->has('position'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('position') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-name">Position</label>
+                                        <input type="text" name="position[]" id="input-name" class="form-control form-control-alternative" placeholder="Position" required autofocus>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('year_from') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Year From') }}</label>
-                                    <input type="text" name="year_from" id="input-name" class="form-control form-control-alternative{{ $errors->has('year_from') ? ' is-invalid' : '' }}" placeholder="{{ __('From:') }}" value="{{ old('year_from') }}" required autofocus>
-
-                                    @if ($errors->has('year_from'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('year_from') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-name">Year From</label>
+                                        <input type="text" name="year_from[]" id="input-name" class="form-control form-control-alternative" placeholder="From:" required autofocus>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group{{ $errors->has('year_to') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Year To') }}</label>
-                                    <input type="text" name="year_to" id="input-name" class="form-control form-control-alternative{{ $errors->has('year_to') ? ' is-invalid' : '' }}" placeholder="{{ __('To:') }}" value="{{ old('year_to') }}" required autofocus>
-
-                                    @if ($errors->has('year_to'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('year_to') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-name">Year To</label>
+                                        <input type="text" name="year_to[]" id="input-name" class="form-control form-control-alternative" placeholder="To:" required autofocus>
+    
+                                    </div>
                                 </div>
+                                <a class="add neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none px-3" style="display:inline-block; height: 50px;"><i class="fas fa-plus text-success" style="font-size: 1.1rem"></i></a>
+                                <a class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none px-3" style="display:inline-block; height: 50px;"><i class="fas fa-trash text-danger" style="font-size: 1.1rem"></i></a>
                             </div>
                         </div>
-
+                        {{-- TODO:Workxperience--}}
                         <hr class="my-4" />
                         <h6 class="heading-small text-muted mb-4">{{ __('Household') }}</h6>
                         <div class="row">
@@ -272,8 +250,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('residence.edit', request()->route()->parameters) }}" class="btn btn-primary mt-4"><i class="fas fa-angle-left mr-2"></i>{{ __('Previous') }}</a>
+                            <button type="submit" class="btn btn-success mt-4" value="Submit Form">{{ __('Next') }}<i class="fas fa-angle-right ml-2"></i></button>
                         </div>
                     </div>
                 </div>
@@ -283,5 +262,17 @@
     @include('layouts.footers.auth')
 </div>
 </form>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $(this).on("click", ".add", function(){
+         var html = '<div class="form-group w-100 d-flex align-items-center"><div class="col-md-4"><div class="form-group"><label class="form-control-label" for="input-name">Job Type</label><input type="text" name="job_type[]" id="input-name" class="form-control form-control-alternative" placeholder="Job Type"  required autofocus></div></div><div class="col-md-3"><div class="form-group"><label class="form-control-label" for="input-name">Position</label><input type="text" name="position[]" id="input-name" class="form-control form-control-alternative" placeholder="position[]" required autofocus></div></div><div class="col-md-2"><div class="form-group"><label class="form-control-label" for="input-name">Year From</label><input type="text" name="year_from[]" id="input-name" class="form-control form-control-alternative" placeholder="From:" required autofocus></div></div><div class="col-md-2"><div class="form-group"><label class="form-control-label" for="input-name">Year To</label><input type="text" name="year_to[]" id="input-name" class="form-control form-control-alternative" placeholder="To:" required autofocus></div></div><a class="add neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none px-3" style="display:inline-block; height: 50px;"><i class="fas fa-plus text-success" style="font-size: 1.1rem"></i></a><a class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none px-3 remove" style="display:inline-block; height: 50px;"><i class="fas fa-trash text-danger" style="font-size: 1.1rem"></i></a></div>'
+        $('.work').append(html);
+      });
+      $(this).on("click", ".remove", function(){
+        var target_input = $(this).parent();
+          target_input.remove();
+      });
+    });
+  </script>
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTblRelativesTable extends Migration
+class CreateWorkExperiencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTblRelativesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_relatives', function (Blueprint $table) {
+        Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->date('birthday');
-            $table->string('relationship');
+            $table->string('job_type');
+            $table->string('position');
+            $table->string('year_from');
+            $table->string('year_to');
             $table->unsignedbigInteger('res_id');
-            $table->foreign('res_id')->references('unique_id')->on('tbl_residence');
+            $table->foreign('res_id')->references('unique_id')->on('residents');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateTblRelativesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_relatives');
+        Schema::dropIfExists('work_experiences');
     }
 }
