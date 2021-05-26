@@ -6,6 +6,9 @@
     'class' => 'col-lg-7'
 ])
 
+<form method="post" action="#" autocomplete="off" enctype="multipart/form-data">
+    @csrf
+
 <div class="container-fluid mt--7">
     <div class="row">
         <div class="col-xl-2 order-xl-2 mb-5 mb-xl-0">
@@ -13,7 +16,7 @@
                 <div class="row justify-content-center">
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
-                                    <input type="file" id="imageUpload" name="pwd_img" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" />
                                     <label for="imageUpload"></label>
                                 </div>
                                 <div class="avatar-preview">
@@ -42,7 +45,6 @@
                 <div class="card-body">
 
 
-                        <h6 class="heading-small text-muted mb-4">{{ __('Resident information') }}</h6>
 
                         @if (session('status'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,6 +56,7 @@
                         @endif
 
                         <div class="pl-lg-0">
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group{{ $errors->has('unique_id') ? ' has-danger' : '' }}">
@@ -67,11 +70,15 @@
                                         @endif
                                     </div>
                                 </div>
+                            </div>
 
+                            <hr class="my-4" />
+                            <h6 class="heading-small text-muted mb-4">{{ __('Resident information') }}</h6>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group{{ $errors->has('yearnow') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Year Today') }}</label>
-                                        <input type="text" name="yearnow" id="input-name" class="form-control form-control-alternative{{ $errors->has('yearnow') ? ' is-invalid' : '' }}" placeholder="{{ __('Year Today') }}" value="{{ old('yearnow') }}" required autofocus>
+                                        <input type="text" name="yearnow" id="input-name" class="form-control form-control-alternative{{ $errors->has('yearnow') ? ' is-invalid' : '' }}" placeholder="{{ now()->year }}" value="{{ old('yearnow') }}" required autofocus>
 
                                         @if ($errors->has('yearnow'))
                                             <span class="invalid-feedback" role="alert">
@@ -84,11 +91,24 @@
                                 <div class="col-md-4">
                                     <div class="form-group{{ $errors->has('jobstatus') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Job Status') }}</label>
-                                        <input type="text" name="jobstatus" id="input-name" class="form-control form-control-alternative{{ $errors->has('jobstatus') ? ' is-invalid' : '' }}" placeholder="{{ __('Job Status') }}" value="{{ old('jobstatus') }}" required autofocus>
+                                        <input type="text" name="jobstatus" id="input-name" class="form-control form-control-alternative{{ $errors->has('jobstatus') ? ' is-invalid' : '' }}" placeholder="{{ __('e.g. Employed, Self-Employed') }}" value="{{ old('jobstatus') }}" required autofocus>
 
                                         @if ($errors->has('jobstatus'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('jobstatus') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-name">{{ __('Email Address') }}</label>
+                                        <input type="text" name="email" id="input-name" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('example@gmail.com') }}" value="{{ old('email') }}" required autofocus>
+
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('email') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -143,9 +163,6 @@
                                         <label class="form-control-label" for="input-name">{{ __('Blood Type') }}</label>
                                         <select class="form-control form-control-alternative" name="blood_type" id="blood_type">
 
-                                            {{-- @foreach ($pwd_gender as $pwdgender)
-                                                <option value="{{ $pwdgender->id }}">{{ $pwdgender->gender }}</option>
-                                            @endforeach --}}
 
                                             <option value="">A+</option>
                                             <option value="">O+</option>
@@ -207,10 +224,6 @@
                                         <label class="form-control-label" for="input-name">{{ __('Gender') }}</label>
                                         <select class="form-control form-control-alternative" name="gender" id="gender">
 
-                                            {{-- @foreach ($pwd_gender as $pwdgender)
-                                                <option value="{{ $pwdgender->id }}">{{ $pwdgender->gender }}</option>
-                                            @endforeach --}}
-
                                             <option value="">Male</option>
                                             <option value="">Female</option>
 
@@ -222,10 +235,6 @@
                                     <div class="form-group{{ $errors->has('civstatus_id') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Civil Status') }}</label>
                                         <select class="form-control form-control-alternative" name="civstatus_id" id="civstatus_id">
-
-                                            {{-- @foreach ($civil_status as $civstatus)
-                                                <option value="{{ $civstatus->id }}">{{ $civstatus->civil_status }}</option>
-                                            @endforeach --}}
 
                                             <option value="">Single</option>
                                             <option value="">Married</option>
@@ -296,26 +305,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div id="dynamic-field-1" class="form-group dynamic-field">
-                                            <label class="form-control-label" for="field">{{ __('Type of Disability #1')}}</label>
-                                                <select class="form-control form-control-alternative" name="disability_name[]" id="field">
-                                                    @foreach ($pwd_disabilities as $pwddisability)
-                                                        <option value="{{$pwddisability->pwd_disability}}">{{ $pwddisability->pwd_disability }}</option>
-                                                    @endforeach
-                                                </select>
 
-
-                                        </div>
-                                        <div class="mt-4">
-                                            <button type="button" id="add-button" class="btn btn-primary float-left text-uppercase shadow-sm"><i class="fas fa-plus fa-fw"></i> Add</button>
-                                            <button type="button" id="remove-button" class="btn btn-danger float-left text-uppercase ml-1" disabled="disabled"><i class="fas fa-minus fa-fw"></i> Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
 
                             <hr class="my-4" />
                             <h6 class="heading-small text-muted mb-4">{{ __('Address') }}</h6>
@@ -465,10 +455,10 @@
                                 <h6 class="heading-small text-muted mb-4">{{ __('Other') }}</h6>
 
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('business_name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Business Name') }}</label>
-                                            <input type="text" name="business_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('business_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Business Name') }}" value="{{ old('business_name') }}" required autofocus>
+                                            <input type="text" name="business_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('business_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Leave blank if not applicable') }}" value="{{ old('business_name') }}" required autofocus>
 
                                             @if ($errors->has('business_name'))
                                                 <span class="invalid-feedback" role="alert">
@@ -478,28 +468,31 @@
                                         </div>
                                     </div>
 
-
-                                    <div class="col-md-4">
-                                        <div class="form-group{{ $errors->has('occupation') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-name">{{ __('Occupation') }}</label>
-                                            <input type="text" name="emp_type" id="input-name" class="form-control form-control-alternative{{ $errors->has('occupation') ? ' is-invalid' : '' }}" placeholder="{{ __('Occupation') }}" value="{{ old('occupation') }}" required autofocus>
-
-                                            @if ($errors->has('occupation'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('occupation') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('monthly_income') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-name">{{ __('Skill') }}</label>
+                                            <label class="form-control-label" for="input-name">{{ __('Monthly Income') }}</label>
                                             <input type="text" name="monthly_income" id="input-name" class="form-control form-control-alternative{{ $errors->has('monthly_income') ? ' is-invalid' : '' }}" placeholder="{{ __('Monthly Income') }}" value="{{ old('monthly_income') }}" required autofocus>
 
                                             @if ($errors->has('monthly_income'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('monthly_income') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4" />
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="form-group{{ $errors->has('surveyor') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('Surveyor') }}</label>
+                                            <input type="text" name="surveyor" id="input-name" class="form-control form-control-alternative{{ $errors->has('surveyor') ? ' is-invalid' : '' }}" placeholder="" value="{{ old('surveyor') }}" required autofocus>
+
+                                            @if ($errors->has('surveyor'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('surveyor') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -519,6 +512,7 @@
     </div>
     @include('layouts.footers.auth')
 </div>
+</form>
 
 @endsection
 

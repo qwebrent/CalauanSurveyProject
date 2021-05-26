@@ -41,14 +41,11 @@ class CreateTblResidenceTable extends Migration
             $table->string('voters_id');
             $table->string('contact_no');
             $table->string('business_name')->nullable();
-            $table->string('purok_id');
-            $table->string('hhold_id');
             $table->string('monthly_income');
             $table->string('sfname')->nullable();
             $table->string('smname')->nullable();
             $table->string('slname')->nullable();
             $table->date('sbirthday')->nullable();
-            $table->string('occupation');
             $table->string('surveyor');
             $table->timestamps();
         });

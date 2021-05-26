@@ -20,6 +20,9 @@ class CreateTblHouseholdTable extends Migration
             $table->string('lot')->nullable();
             $table->string('street');
             $table->string('purok');
+            $table->string('barangay');
+            $table->string('municipality');
+            $table->string('province');
             $table->string('date_reg');
             $table->unsignedbigInteger('res_id');
             $table->foreign('res_id')->references('unique_id')->on('tbl_residence');

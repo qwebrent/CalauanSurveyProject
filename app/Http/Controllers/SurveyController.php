@@ -10,6 +10,6 @@ class SurveyController extends Controller
     public function create(){
 
         $barangays = Barangay::get();
-        return view('survey.create', compact('barangays'));
+        return view('survey.resident', compact('barangays'));
     }
 }
