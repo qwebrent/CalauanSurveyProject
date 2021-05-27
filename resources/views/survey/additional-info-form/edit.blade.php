@@ -54,7 +54,7 @@
                             <div class="col-md-4">
                                 <div class="form-group{{ $errors->has('course') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('Course') }}</label>
-                                    <input type="text" name="course" id="input-name" class="form-control form-control-alternative{{ $errors->has('course') ? ' is-invalid' : '' }}" placeholder="{{ __('Course') }}" value="{{ $resident->education->course }}" required autofocus>
+                                    <input type="text" name="course" id="input-name" class="form-control form-control-alternative{{ $errors->has('course') ? ' is-invalid' : '' }}" placeholder="{{ __('Leave blank if not applicable') }}" value="{{ $resident->education->course }}" autofocus>
 
                                     @if ($errors->has('course'))
                                         <span class="invalid-feedback" role="alert">
@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-name">Year To</label>
                                         <input type="text" name="year_to[]" id="input-name" class="form-control form-control-alternative" placeholder="To:" value="{{ $experience->year_to }}" required autofocus>
-    
+
                                     </div>
                                 </div>
 
@@ -162,7 +162,7 @@
                             <div class="col-md-4">
                                 <div class="form-group{{ $errors->has('lot') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('Lot') }}</label>
-                                    <input type="text" name="lot" id="input-name" class="form-control form-control-alternative{{ $errors->has('lot') ? ' is-invalid' : '' }}" placeholder="{{ __('Lot') }}" value="{{ $resident->household->lot}}" required autofocus>
+                                    <input type="text" name="lot" id="input-name" class="form-control form-control-alternative{{ $errors->has('lot') ? ' is-invalid' : '' }}" placeholder="{{ __('Lot') }}" value="{{ $resident->household->lot}}" autofocus>
 
                                     @if ($errors->has('lot'))
                                         <span class="invalid-feedback" role="alert">

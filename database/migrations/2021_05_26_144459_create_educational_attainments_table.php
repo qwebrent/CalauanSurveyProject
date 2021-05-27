@@ -17,7 +17,7 @@ class CreateEducationalAttainmentsTable extends Migration
             $table->id();
             $table->string('school_name');
             $table->string('school_address');
-            $table->string('course');
+            $table->string('course')->nullable();
             $table->string('level');
             $table->string('school_year');
             $table->unsignedBigInteger('res_id');

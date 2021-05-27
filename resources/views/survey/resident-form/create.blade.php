@@ -180,7 +180,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group{{ $errors->has('birthplace') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Birthplace') }}</label>
-                                        <input type="text" name="birthplace" id="input-name" class="form-control form-control-alternative{{ $errors->has('birthplace') ? ' is-invalid' : '' }}" placeholder="{{ __('Birthplace') }}" value="{{ old('birthplace') }}" required autofocus>
+                                        <input type="text" name="birthplace" id="input-name" class="form-control form-control-alternative{{ $errors->has('birthplace') ? ' is-invalid' : '' }}" placeholder="{{ __('Municipality, Province') }}" value="{{ old('birthplace') }}" required autofocus>
 
                                         @if ($errors->has('birthplace'))
                                             <span class="invalid-feedback" role="alert">
@@ -230,9 +230,9 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <div class="form-group{{ $errors->has('civstatus_id') ? ' has-danger' : '' }}">
+                                    <div class="form-group{{ $errors->has('civstatus') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Civil Status') }}</label>
-                                        <select class="form-control form-control-alternative" name="civstatus" id="civstatus_id">
+                                        <select class="form-control form-control-alternative" name="civstatus" id="civstatus">
                                             <option>Single</option>
                                             <option>Married</option>
                                             <option>Divorced</option>
@@ -245,7 +245,7 @@
                                     <div class="form-group{{ $errors->has('citizenship') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('Citizenship') }}</label>
                                         <input type="text" name="citizenship" id="input-name" class="form-control form-control-alternative{{ $errors->has('citizenship') ? ' is-invalid' : '' }}" placeholder="{{ __('Citizenship') }}" value="{{ old('citizenship') }}" required autofocus>
-                                        
+
                                         @if ($errors->has('citizenship'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('citizenship') }}</strong>
@@ -321,7 +321,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('block') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Block') }}</label>
-                                            <input type="text" name="block" id="input-name" class="form-control form-control-alternative{{ $errors->has('block') ? ' is-invalid' : '' }}" placeholder="{{ __('Block') }}" value="{{ old('block') }}" required autofocus>
+                                            <input type="text" name="block" id="input-name" class="form-control form-control-alternative{{ $errors->has('block') ? ' is-invalid' : '' }}" placeholder="{{ __('Block') }}" value="{{ old('block') }}" autofocus>
 
                                             @if ($errors->has('block'))
                                                 <span class="invalid-feedback" role="alert">
@@ -334,7 +334,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('lot') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Lot') }}</label>
-                                            <input type="text" name="lot" id="input-name" class="form-control form-control-alternative{{ $errors->has('lot') ? ' is-invalid' : '' }}" placeholder="{{ __('Lot') }}" value="{{ old('lot') }}" required autofocus>
+                                            <input type="text" name="lot" id="input-name" class="form-control form-control-alternative{{ $errors->has('lot') ? ' is-invalid' : '' }}" placeholder="{{ __('Lot') }}" value="{{ old('lot') }}" autofocus>
 
                                             @if ($errors->has('lot'))
                                                 <span class="invalid-feedback" role="alert">
@@ -362,9 +362,9 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-group{{ $errors->has('barangay_id') ? ' has-danger' : '' }}">
+                                        <div class="form-group{{ $errors->has('barangay') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Barangay') }}</label>
-                                            <select class="form-control form-control-alternative" name="barangay" id="barangay_id">
+                                            <select class="form-control form-control-alternative" name="barangay" id="barangay">
 
                                                 @foreach ($barangays as $barangay)
                                                     <option value="{{$barangay->id}}">{{ $barangay->barangay }}</option>
@@ -408,7 +408,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('slname') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Spouse Last Name') }}</label>
-                                            <input type="text" name="slname" id="input-name" class="form-control form-control-alternative{{ $errors->has('slname') ? ' is-invalid' : '' }}" placeholder="{{ __('Last Name') }}" value="{{ old('slname') }}" required autofocus>
+                                            <input type="text" name="slname" id="input-name" class="form-control form-control-alternative{{ $errors->has('slname') ? ' is-invalid' : '' }}" placeholder="{{ __('Last Name') }}" value="{{ old('slname') }}" autofocus>
 
                                             @if ($errors->has('slname'))
                                                 <span class="invalid-feedback" role="alert">
@@ -421,7 +421,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('sfname') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Spouse First Name') }}</label>
-                                            <input type="text" name="sfname" id="input-name" class="form-control form-control-alternative{{ $errors->has('sfname') ? ' is-invalid' : '' }}" placeholder="{{ __('First Name') }}" value="{{ old('sfname') }}" required autofocus>
+                                            <input type="text" name="sfname" id="input-name" class="form-control form-control-alternative{{ $errors->has('sfname') ? ' is-invalid' : '' }}" placeholder="{{ __('First Name') }}" value="{{ old('sfname') }}" autofocus>
 
                                             @if ($errors->has('fname'))
                                                 <span class="invalid-feedback" role="alert">
@@ -434,7 +434,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('smname') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Middle Name') }}</label>
-                                            <input type="text" name="smname" id="input-name" class="form-control form-control-alternative{{ $errors->has('smname') ? ' is-invalid' : '' }}" placeholder="{{ __('Middle Name') }}" value="{{ old('smname') }}" required autofocus>
+                                            <input type="text" name="smname" id="input-name" class="form-control form-control-alternative{{ $errors->has('smname') ? ' is-invalid' : '' }}" placeholder="{{ __('Middle Name') }}" value="{{ old('smname') }}" autofocus>
 
                                             @if ($errors->has('smname'))
                                                 <span class="invalid-feedback" role="alert">
@@ -447,7 +447,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('sbirthday') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Spouse Birthdate') }}</label>
-                                            <input type="date" name="sbirthday" id="input-name" class="form-control form-control-alternative{{ $errors->has('sbirthday') ? ' is-invalid' : '' }}" placeholder="" value="{{ old('sbirthday') }}" required autofocus>
+                                            <input type="date" name="sbirthday" id="input-name" class="form-control form-control-alternative{{ $errors->has('sbirthday') ? ' is-invalid' : '' }}" placeholder="" value="{{ old('sbirthday') }}" autofocus>
 
                                             @if ($errors->has('sbirthday'))
                                                 <span class="invalid-feedback" role="alert">
@@ -465,7 +465,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('business_name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Business Name') }}</label>
-                                            <input type="text" name="business_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('business_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Leave blank if not applicable') }}" value="{{ old('business_name') }}" required autofocus>
+                                            <input type="text" name="business_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('business_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Leave blank if not applicable') }}" value="{{ old('business_name') }}" autofocus>
 
                                             @if ($errors->has('business_name'))
                                                 <span class="invalid-feedback" role="alert">
