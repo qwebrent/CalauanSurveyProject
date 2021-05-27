@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="header-body">
             <!-- Card stats -->
-            <div class="row">
+            {{-- <div class="row">
                 @foreach($barangays as $barangay)
                 <div class="col-xl-4 col-lg-6">
                     <div class="card card-stats mb-4 my-2">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 @endforeach
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
